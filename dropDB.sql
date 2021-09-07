@@ -1,0 +1,17 @@
+drop database log_admin_command;
+drop database log_battle_damage;
+drop database log_battle_die;
+drop database log_battle_deployable_damage;
+drop database log_battle_wound;
+drop database log_battle_revive;
+drop database log_battle_vehicle_damage;
+drop database log_battle_vehicle_destroy;
+drop database log_cameraman;
+drop database log_map_rotation;
+drop database log_match_winner;
+drop database log_player_connect;
+drop database log_player_disconnect;
+drop database log_possess;
+drop database log_unpossess;
+drop database log_server_tick_rate;
+drop database log_squads;

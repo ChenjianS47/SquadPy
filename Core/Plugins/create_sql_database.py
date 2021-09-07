@@ -97,6 +97,7 @@ def create_sql_database(database_info, date_today):
                                "Time VARCHAR(12) NOT NULL, " \
                                "Player_name VARCHAR(255) NOT NULL, " \
                                "Steam_64ID VARCHAR(17) NOT NULL, " \
+                               "Squad_sequnce_num VARCHAR(255) NOT NULL, " \
                                "Player_Squad_name VARCHAR(255), " \
                                "Team_name VARCHAR(255) NOT NULL, " \
                                "server_id VARCHAR(255) NOT NULL)"

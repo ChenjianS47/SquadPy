@@ -8,8 +8,10 @@ def LogSquad_create_squad(data_str, server_id):
     time = (matchObj.group(0).split("[")[1].split(']')[0]).split("-")[1]
     Player_name = matchObj.group(2)
     Player_64id = matchObj.group(3)
-    Player_Squad_name = matchObj.group(4)
-    Team_name = matchObj.group(5)
-    return (date, time, str(Player_name), int(Player_64id), str(Player_Squad_name), str(Team_name), server_id)
+    Squad_sequnce_num = matchObj.group(4)
+    Player_Squad_name = matchObj.group(5)
+    Team_name = matchObj.group(6)
+    return (date, time, str(Player_name), int(Player_64id), str(Squad_sequnce_num),
+            str(Player_Squad_name), str(Team_name), server_id)
     pass
 

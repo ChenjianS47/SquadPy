@@ -199,6 +199,7 @@ def Log_Parser_SQL(database_info, server_id, log_address, date_today, LogNet_sta
                     pass
                 pass
             pass
+            # This print(i) only use for DEBUG
             print(i)
             pass
         pass

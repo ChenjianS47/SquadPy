@@ -10,7 +10,7 @@ def LogNet_succed(data_str):
     date_time_n = (date_time + datetime.timedelta(hours=8)).strftime("%Y.%m.%d-%H.%M.%S:%f")
     date = date_time_n.split("-")[0]
     time = date_time_n.split("-")[1]
-    Player_name = matchObj.group(2)
+    Player_name = (matchObj.group(2))[:-1]
     LogNeT_join = 0
     return (date, time, str(Player_name), LogNeT_join)
     pass

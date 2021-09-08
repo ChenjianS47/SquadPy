@@ -1,8 +1,8 @@
 # Input the database into this block
 database_info = {"database_host": "127.0.0.3",
                  "database_port": 3306,
-                 "database_user": "foreconadmin",
-                 "database_passwd": "foreconadmin123!@#"
+                 "database_user": "test",
+                 "database_passwd": "test"
                  }
 
 # Input the server info in this block

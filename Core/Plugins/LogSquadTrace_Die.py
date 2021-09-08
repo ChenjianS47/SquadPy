@@ -17,7 +17,7 @@ def LogSquadTrace_Die(data_str, server_id):
     Player_Victim_name = matchObj.group(2)
     Damage = matchObj.group(3)
     Player_attcker_Controller = matchObj.group(5)
-    Weapon = matchObj.group(6)
+    Weapon = (matchObj.group(6)).split("_C_")[0]
     return (date, time, str(Player_Victim_name), float(Damage), str(Player_attcker_Controller), str(Weapon), server_id)
     pass
 

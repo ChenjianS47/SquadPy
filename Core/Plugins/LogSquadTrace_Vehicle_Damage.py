@@ -18,7 +18,7 @@ def LogSquadTrace_Vehicle_Damage(data_str, server_id):
     time = date_time_n.split("-")[1]
     Destoryed_Vehichle = matchObj.group(2)
     Damage = matchObj.group(3)
-    By_Weapon = matchObj.group(5)
+    By_Weapon = matchObj.group(5).split("_C_")[0]
     By_Player = matchObj.group(6)
     Health_remain = matchObj.group(7)
     return (date, time, str(Destoryed_Vehichle), float(Damage), str(By_Weapon), str(By_Player),

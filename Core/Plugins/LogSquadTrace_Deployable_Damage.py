@@ -20,7 +20,7 @@ def LogSquadTrace_Deployable_Damage(data_str, server_id):
     time = date_time_n.split("-")[1]
     Damage_taker = matchObj.group(2)
     Damage = matchObj.group(3)
-    By_Weapon = matchObj.group(5)
+    By_Weapon = matchObj.group(5).split("_C_")[0]
     By_Player = matchObj.group(6)
     if temp_set == 0:
         Damage_type = None

@@ -13,6 +13,6 @@ def LogSquad_Damage(data_str, server_id):
     Player_take_damage = matchObj.group(2)
     Damage = matchObj.group(3)
     Player_make_damage = matchObj.group(5)
-    Weapon = matchObj.group(6)
+    Weapon = matchObj.group(6).split("_C_")[0]
     return (date, time, str(Player_take_damage), str(Damage), str(Player_make_damage), str(Weapon), server_id)
     pass

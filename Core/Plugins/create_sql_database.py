@@ -27,7 +27,7 @@ def create_sql_database(database_info, date_today):
         if i == 'Log_Admin_Command':
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "CMD VARCHAR(255) NOT NULL, " \
                                "Info VARCHAR(255) NOT NULL, " \
                                "server_id VARCHAR(255) NOT NULL)"
@@ -35,7 +35,7 @@ def create_sql_database(database_info, date_today):
         if i == 'Log_Battle_die':
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "Player_Victim_name VARCHAR(255), " \
                                "Damage FLOAT NOT NULL, " \
                                "Player_attacker_Controller VARCHAR(255), " \
@@ -45,7 +45,7 @@ def create_sql_database(database_info, date_today):
         if i == 'Log_Battle_revive':
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "Player_Rescuer VARCHAR(255) NOT NULL, " \
                                "Player_Rescued VARCHAR(255) NOT NULL, " \
                                "server_id VARCHAR(255) NOT NULL)"
@@ -53,7 +53,7 @@ def create_sql_database(database_info, date_today):
         if i == 'Log_Battle_wound':
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "Player_Victim_name VARCHAR(255), " \
                                "Damage FLOAT NOT NULL, " \
                                "Player_attacker_Controller VARCHAR(255), " \
@@ -63,14 +63,14 @@ def create_sql_database(database_info, date_today):
         if i == 'Log_CameraMan':
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "CameraMan_ID VARCHAR(255) NOT NULL, " \
                                "server_id VARCHAR(255) NOT NULL)"
             pass
         if i == 'Log_Map_rotation':
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "Level VARCHAR(255) NOT NULL, " \
                                "Layer VARCHAR(255) NOT NULL, " \
                                "server_id VARCHAR(255) NOT NULL)"
@@ -78,7 +78,7 @@ def create_sql_database(database_info, date_today):
         if i == 'Log_Player_connect':
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "Player_name VARCHAR(255) NOT NULL, " \
                                "Steam_64ID VARCHAR(17) NOT NULL, " \
                                "PlayerController VARCHAR(255) NOT NULL, " \
@@ -87,14 +87,14 @@ def create_sql_database(database_info, date_today):
         if i == 'Log_Player_disconnect':
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "Steam_64ID VARCHAR(17) NOT NULL, " \
                                "server_id VARCHAR(255) NOT NULL)"
             pass
         if i == 'Log_Squads':
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "Player_name VARCHAR(255) NOT NULL, " \
                                "Steam_64ID VARCHAR(17) NOT NULL, " \
                                "Squad_sequnce_num VARCHAR(255) NOT NULL, " \
@@ -105,7 +105,7 @@ def create_sql_database(database_info, date_today):
         if i == "Log_Possess":
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "Player_name VARCHAR(255) NOT NULL, " \
                                "Player_equip VARCHAR(255), " \
                                "server_id VARCHAR(255) NOT NULL)"
@@ -113,14 +113,14 @@ def create_sql_database(database_info, date_today):
         if i == "Log_UnPossess":
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "Player_name VARCHAR(255) NOT NULL, " \
                                "server_id VARCHAR(255) NOT NULL)"
             pass
         if i == "Log_Match_Winner":
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "winner VARCHAR(255) NOT NULL, " \
                                "Layer VARCHAR(255), " \
                                "server_id VARCHAR(255) NOT NULL)"
@@ -128,14 +128,14 @@ def create_sql_database(database_info, date_today):
         if i == "Log_Server_Tick_Rate":
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "Server_Tick_Rate VARCHAR(255) NOT NULL, " \
                                "server_id VARCHAR(255) NOT NULL)"
             pass
         if i == 'Log_Battle_Vehicle_Damage':
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "Destoryed_Vehichle VARCHAR(255) NOT NULL, " \
                                "Damage VARCHAR(255) NOT NULL, " \
                                "By_Weapon VARCHAR(255) NOT NULL, " \
@@ -146,7 +146,7 @@ def create_sql_database(database_info, date_today):
         if i == 'Log_Battle_Vehicle_Destroy':
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "Destoryed_Vehichle VARCHAR(255) NOT NULL, " \
                                "Damage VARCHAR(255) NOT NULL, " \
                                "By_Weapon VARCHAR(255) NOT NULL, " \
@@ -158,7 +158,7 @@ def create_sql_database(database_info, date_today):
         if i == 'Log_Battle_damage':
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "Player_take_damage VARCHAR(255) NOT NULL, " \
                                "Damage VARCHAR(255) NOT NULL, " \
                                "Player_make_damage VARCHAR(255) NOT NULL, " \
@@ -168,14 +168,14 @@ def create_sql_database(database_info, date_today):
         if i == 'Log_Server_Tick_Rate':
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "Server_Tick_Rate VARCHAR(255) NOT NULL, " \
                                "server_id VARCHAR(255) NOT NULL)"
             pass
         if i == 'Log_Battle_Deployable_Damage':
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
                                " (Date VARCHAR(10) NOT NULL, " \
-                               "Time VARCHAR(12) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
                                "Damage_taker VARCHAR(255) NOT NULL, " \
                                "Damage VARCHAR(255) NOT NULL, " \
                                "By_Weapon VARCHAR(255) NOT NULL, " \

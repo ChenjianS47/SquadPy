@@ -200,7 +200,7 @@ def Log_Parser_SQL(database_info, server_id, log_address, date_today, LogNet_sta
                 pass
             pass
             # This print(i) only use for DEBUG
-            print(i)
+            # print(i)
             pass
         pass
     t_ime.sleep(1)

@@ -38,4 +38,5 @@ class threadLogParser(threading.Thread):
                 pass
             self.last_point = self.start_point
             pass
+        pass
     pass

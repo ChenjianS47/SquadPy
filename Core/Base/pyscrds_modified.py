@@ -4,7 +4,7 @@
 import struct
 import socket
 import itertools
-
+import re
 
 # Packet types
 SERVERDATA_AUTH = 3
@@ -57,7 +57,7 @@ class RconConnection(object):
         self._sock = socket.create_connection((server, port))
         self.pkt_id = itertools.count(1)
         self._authenticate(password)
-        self.chat_message = 'N/A'
+        self.chat_message = 'NA'
 
     def _authenticate(self, password):
         """Authenticate with the server using the given password."""
@@ -102,11 +102,8 @@ class RconConnection(object):
             if len(header) != 0:
                 break
         (pkt_size, pkt_id, pkt_type) = struct.unpack('<3i', header)
-        body = self._sock.recv(pkt_size - 8)
-        # Judge whether the pkt_type is chat data or not, if it is, return it to the variable self.chat_message
-        if pkt_type == SERVERDATA_CHAT:
-            self.chat_message = (body.decode('utf-8'))
-            return self._recv_pkt()
+        # Change the variable body from bytes to str
+        body = (self._sock.recv(pkt_size - 8)).decode('utf-8')
         return RconPacket(pkt_id, pkt_type, body)
 
     def read_response(self, request=None, multi=False):
@@ -158,8 +155,25 @@ class RconConnection(object):
                           ''.join(str(body_parts)))
 
     def receive_chat_message(self):
-        chat_msg = self.chat_message
-        return chat_msg
+        while True:
+            header = self._sock.recv(struct.calcsize('<3i'))
+            if len(header) != 0:
+                break
+        (pkt_size, pkt_id, pkt_type) = struct.unpack('<3i', header)
+        if pkt_type == SERVERDATA_CHAT:
+            chat_msg = ((self._sock.recv(pkt_size - 8)).decode('utf-8'))[:-2]
+            pass
+        else:
+            chat_msg = ""
+            pass
+        # Delete the \x00\x00 at the end of the message
+        if chat_msg != "":
+            matchOjb = re.search(r'\[(.*)] \[SteamID:(.*)] (.*) : (.*)', chat_msg, re.M | re.I)
+            chat_type = matchOjb.group(1)
+            player_64id = matchOjb.group(2)
+            player_name = matchOjb.group(3)
+            chat_content = matchOjb.group(4)
+            return chat_type, player_64id, player_name, chat_content
         pass
 
 
@@ -171,6 +185,8 @@ class RconError(Exception):
 class RconAuthError(RconError):
     """Raised if an RCON Authentication error occurs."""
     pass
+
+
 
 
 class RconSizeError(RconError):

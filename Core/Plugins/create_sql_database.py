@@ -11,7 +11,8 @@ def create_sql_database(database_info, date_today):
     database_name = ('Log_Admin_Command', 'Log_Battle_die', 'Log_Battle_revive', 'Log_Battle_wound', 'Log_CameraMan',
                      'Log_Map_rotation', 'Log_Player_connect', 'Log_Player_disconnect', 'Log_Squads', 'Log_Possess',
                      'Log_UnPossess', 'Log_Match_Winner', 'Log_Server_Tick_Rate', 'Log_Battle_damage',
-                     'Log_Battle_Vehicle_Damage', 'Log_Battle_Vehicle_Destroy', 'Log_Battle_Deployable_Damage')
+                     'Log_Battle_Vehicle_Damage', 'Log_Battle_Vehicle_Destroy', 'Log_Battle_Deployable_Damage',
+                     'Log_Server_Chat_Message')
 
     # Create connection to database
     db = MySQLdb.connect(host=database_host, port=database_port, user=database_user, passwd=database_passwd,
@@ -182,6 +183,16 @@ def create_sql_database(database_info, date_today):
                                "By_Player VARCHAR(255) NOT NULL, " \
                                "Damage_type VARCHAR(255) NOT NULL, " \
                                "Health_remain VARCHAR(255) NOT NULL, " \
+                               "server_id VARCHAR(255) NOT NULL)"
+            pass
+        if i == 'Log_Server_Chat_Message':
+            sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
+                               " (Date VARCHAR(10) NOT NULL, " \
+                               "Time VARCHAR(255) NOT NULL, " \
+                               "Chat_type VARCHAR(255) NOT NULL, " \
+                               "Player_64id VARCHAR(255) NOT NULL, " \
+                               "Player_name VARCHAR(255) NOT NULL, " \
+                               "Chat_Content TEXT(65535) NOT NULL, " \
                                "server_id VARCHAR(255) NOT NULL)"
             pass
         mycursor.execute(sql_create_table)

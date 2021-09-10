@@ -1,6 +1,7 @@
 import threading
 import datetime
 from Core.Base.Log_Parser_SQL import Log_Parser_SQL
+from Core.Plugins.create_sql_database import create_sql_database
 
 class threadLogParser(threading.Thread):
     def __init__(self, database_info, server_info, date_today, threadID):
@@ -18,6 +19,8 @@ class threadLogParser(threading.Thread):
 
     def run(self):
         while 1 > 0:
+            # Create the datebase when the program starts
+            create_sql_database(self.database_info, self.date_today)
             print("updating the log of server {} to SQL {}".format(
                 self.server_name, datetime.datetime.now().strftime('%H:%M:%S')))
             try:

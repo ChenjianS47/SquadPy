@@ -4,13 +4,12 @@ import threading
 
 from config import *
 from Core.Core_main import threadLogParser
-from Core.Plugins.create_sql_database import create_sql_database
+
 
 # Get date of today
 date_today = datetime.datetime.now().strftime('%Y.%m.%d')
 
-# Create the datebase when the program starts
-create_sql_database(database_info, date_today)
+
 
 threads = {}
 

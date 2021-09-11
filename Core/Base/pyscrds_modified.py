@@ -154,6 +154,7 @@ class RconConnection(object):
         return RconPacket(req_pkt.pkt_id, SERVERDATA_RESPONSE_VALUE,
                           ''.join(str(body_parts)))
 
+    # Add this function for receive the in-game chat message
     def receive_chat_message(self):
         while True:
             header = self._sock.recv(struct.calcsize('<3i'))

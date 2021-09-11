@@ -16,18 +16,32 @@ class rconChatMesssage(threading.Thread):
 
     def run(self):
         while 1:
-            chat_type, Player_64id, Player_name, chat_content = rcon_chat_message(
+            chat_type, info_1, info_2, chat_content, chat_property = rcon_chat_message(
                 server_rcon_info=self.server_rcon_info, server_name=self.server_name)
-            Insert_SQL(database_info=self.database_info,
-                       db_name='Log_Server_Chat_Message',
-                       table=self.date_today,
-                       value=(datetime.datetime.now().strftime("%Y.%m.%d"),
-                              datetime.datetime.now().strftime("%H.%M.%S:%f"),
-                              chat_type,
-                              Player_64id,
-                              Player_name,
-                              chat_content,
-                              self.server_id))
+            if chat_property == 'Chat':
+                Insert_SQL(database_info=self.database_info,
+                           db_name='Log_Server_Chat_Message',
+                           table=self.date_today,
+                           value=(datetime.datetime.now().strftime("%Y.%m.%d"),
+                                  datetime.datetime.now().strftime("%H.%M.%S:%f"),
+                                  chat_type,
+                                  info_1,
+                                  info_2,
+                                  chat_content,
+                                  self.server_id))
+                pass
+            elif chat_property == 'TeamKill':
+                Insert_SQL(database_info=self.database_info,
+                           db_name='Log_Server_TK_Message',
+                           table=self.date_today,
+                           value=(datetime.datetime.now().strftime("%Y.%m.%d"),
+                                  datetime.datetime.now().strftime("%H.%M.%S:%f"),
+                                  chat_type,
+                                  info_1,
+                                  info_2,
+                                  chat_content,
+                                  self.server_id))
+                pass
             pass
         pass
     pass

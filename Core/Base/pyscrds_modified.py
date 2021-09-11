@@ -167,14 +167,29 @@ class RconConnection(object):
         else:
             chat_msg = ""
             pass
-        # Delete the \x00\x00 at the end of the message
+        # print(chat_msg)
         if chat_msg != "":
-            matchOjb = re.search(r'\[(.*)] \[SteamID:(.*)] (.*) : (.*)', chat_msg, re.M | re.I)
-            chat_type = matchOjb.group(1)
-            player_64id = matchOjb.group(2)
-            player_name = matchOjb.group(3)
-            chat_content = matchOjb.group(4)
-            return chat_type, player_64id, player_name, chat_content
+            try:
+                matchOjb = re.search(r'\[(.*)] \[SteamID:(.*)] (.*) : (.*)', chat_msg, re.M | re.I)
+                # Access the information of chat
+                chat_type = matchOjb.group(1)
+                player_64id = matchOjb.group(2)
+                player_name = matchOjb.group(3)
+                chat_content = matchOjb.group(4)
+                chat_property = 'Chat'
+                return chat_type, player_64id, player_name, chat_content, chat_property
+                pass
+            except:
+                # Access the information of the Team kill
+                matchOjb = re.search(r'\[ChatAdmin] ASQKillDeathRuleset : Player (.*)%s Team Killed Player (.*)'
+                                     , chat_msg, re.M | re.S)
+                chat_type = 'ChatAdmin'
+                Player_attacker = matchOjb.group(1)
+                Player_victim = matchOjb.group(2)
+                chat_content = 'TeamKill'
+                chat_property = 'TeamKill'
+                return chat_type, Player_attacker, Player_victim, chat_content, chat_property
+                pass
         pass
 
 

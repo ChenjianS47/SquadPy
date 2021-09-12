@@ -6,12 +6,9 @@ from Core.Plugins.LogEasyAntiCheatServer import LogEasyAntiCheatServer
 from Core.Plugins.LogNet_request import LogNet_request
 from Core.Plugins.LogNet_succed import LogNet_succed
 from Core.Plugins.LogOnline_disconnect import LogOnline_disconnect
-from Core.Plugins.LogSquad_Admin_Ban import LogSquad_Admin_Ban
 from Core.Plugins.LogSquad_Admin_broadcaste import LogSquad_Admin_broadcaste
 from Core.Plugins.LogSquad_Admin_change_layer import LogSquad_Admin_change_layer
-from Core.Plugins.LogSquad_Admin_disband_squad import LogSquad_Admin_disband_squad
 from Core.Plugins.LogSquad_Admin_Forced_team_change import LogSquad_Admin_Forced_team_change
-from Core.Plugins.LogSquad_Admin_Kick import LogSquad_Admin_Kick
 from Core.Plugins.LogSquad_Admin_set_layer import LogSquad_Admin_set_layer
 from Core.Plugins.LogSquad_create_squad import LogSquad_create_squad
 from Core.Plugins.LogSquad_Damage import LogSquad_Damage
@@ -19,7 +16,6 @@ from Core.Plugins.LogSquad_map import LogSquad_map
 from Core.Plugins.LogSquad_PostLogin import LogSquad_PostLogin
 from Core.Plugins.LogSquad_revive import LogSquad_revive
 from Core.Plugins.LogSquad_Server_Tick_Rate import LogSquad_Server_Tick_Rate
-from Core.Plugins.LogSquadTrace_CameraMan import LogSquadTrace_CameraMan
 from Core.Plugins.LogSquadTrace_Deployable_Damage import LogSquadTrace_Deployable_Damage
 from Core.Plugins.LogSquadTrace_Die import LogSquadTrace_Die
 from Core.Plugins.LogSquadTrace_Match_Winner import LogSquadTrace_Match_Winner
@@ -75,10 +71,6 @@ def Log_Parser_SQL(database_info, server_id, log_address, date_today, LogNet_sta
                 # If the line contained the word sets "ADMIN COMMAND", use LogSquad_Admin_cmd() for logging the usage of
                 # Admin command
                 if sec_action == "ADMIN COMMAND":
-                    if len(((text[1].split(": "))[2]).split("Banned ")) == 2:
-                        Insert_SQL(database_info, 'Log_Admin_Command', date_today,
-                                   LogSquad_Admin_Ban(data[i], server_id))
-                        pass
                     if len(((text[1].split(": "))[2]).split("Message broadcasted")) == 2:
                         Insert_SQL(database_info, 'Log_Admin_Command', date_today,
                                    LogSquad_Admin_broadcaste(data[i], server_id))
@@ -87,18 +79,9 @@ def Log_Parser_SQL(database_info, server_id, log_address, date_today, LogNet_sta
                         Insert_SQL(database_info, 'Log_Admin_Command', date_today,
                                    LogSquad_Admin_change_layer(data[i], server_id))
                         pass
-                    if len(((text[1].split(": "))[2]).split("Remote admin disbanded")) == 2:
-                        Insert_SQL(database_info, 'Log_Admin_Command', date_today,
-                                   LogSquad_Admin_disband_squad(data[i], server_id))
-                        pass
-                    pass
                     if len(((text[1].split(": "))[2]).split("Forced team change for player")) == 2:
                         Insert_SQL(database_info, 'Log_Admin_Command', date_today,
                                    LogSquad_Admin_Forced_team_change(data[i], server_id))
-                        pass
-                    if len(((text[1].split(": "))[2]).split("Kicked ")) == 2:
-                        Insert_SQL(database_info, 'Log_Admin_Command', date_today,
-                                   LogSquad_Admin_Kick(data[i], server_id))
                         pass
                     if len(((text[1].split(": "))[2]).split("Set next layer to")) == 2:
                         Insert_SQL(database_info, 'Log_Admin_Command', date_today,
@@ -144,14 +127,7 @@ def Log_Parser_SQL(database_info, server_id, log_address, date_today, LogNet_sta
                 pass
             if action == "LogSquadTrace":
                 if sec_action == "[DedicatedServer]ASQPlayerController::OnPossess()":
-                    if len((text[1].split(": "))[2].split("CameraMan")) == 4:
-                        Insert_SQL(database_info, 'Log_CameraMan', date_today,
-                                   LogSquadTrace_CameraMan(data[i], server_id))
-                        pass
-                    else:
-                        Insert_SQL(database_info, 'Log_Possess', date_today,
-                                   LogSquadTrace_OnPossess(data[i], server_id))
-                        pass
+                    Insert_SQL(database_info, 'Log_Possess', date_today, LogSquadTrace_OnPossess(data[i], server_id))
                     pass
                 if sec_action == "[DedicatedServer]ASQPlayerController::OnUnPossess()":
                     Insert_SQL(database_info, 'Log_UnPossess', date_today,

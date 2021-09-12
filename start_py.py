@@ -21,8 +21,8 @@ for threadID in range(len(server_rcon)):
                                               date_today=date_today, threadID=threadID)
     pass
 
-while 1 > 0:
-    print('Checking the Thread is shutdown or not')
+while 1:
+    print('{}, Checking the Thread is shutdown or not'.format(datetime.datetime.now().strftime("%H.%M.%S:%f")))
     for threadID in range(len(server_info)):
         if not threads[threadID].is_alive():
             threads[threadID].start()
@@ -32,8 +32,8 @@ while 1 > 0:
     for threadID in range(len(server_rcon)):
         if not rcon_threads[threadID].is_alive():
             rcon_threads[threadID].start()
-            print("Reboot the Rcon_Chat_receive"+str(list(server_info.keys())[threadID]))
+            print("Reboot the Rcon_Chat_receive"+str(list(server_rcon.keys())[threadID]))
             pass
-    time.sleep(1)
+    time.sleep(10)
     pass
 pass

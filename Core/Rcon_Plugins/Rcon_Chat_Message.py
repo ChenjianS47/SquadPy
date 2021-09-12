@@ -7,8 +7,8 @@ def rcon_chat_message(server_rcon_info,server_name):
     conn = rcon.RconConnection(server=server_rcon_info[server_name]['Server_IP'],
                                port=server_rcon_info[server_name]['RCON_Port'],
                                password=server_rcon_info[server_name]['Server_pw'])
-    info = conn.receive_chat_message()
-    return info
+    chat_msg, chat_property = conn.receive_chat_message()
+    return chat_msg, chat_property
     pass
 
 

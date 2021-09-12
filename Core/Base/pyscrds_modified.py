@@ -125,7 +125,8 @@ class RconConnection(object):
             response = self._read_multi_response(request)
         else:
             response = self._recv_pkt()
-        if not self.single_packet_mode and response.pkt_type not in (SERVERDATA_RESPONSE_VALUE, SERVERDATA_AUTH_RESPONSE):
+        if not self.single_packet_mode and response.pkt_type not in (
+                SERVERDATA_RESPONSE_VALUE, SERVERDATA_AUTH_RESPONSE):
             raise RconError('Recieved unexpected RCON packet type')
         if request and response.pkt_id != request.pkt_id:
             raise RconError('Response ID does not match request ID')
@@ -167,29 +168,33 @@ class RconConnection(object):
         else:
             chat_msg = ""
             pass
-        # print(chat_msg)
-        if chat_msg != "":
-            try:
-                matchOjb = re.search(r'\[(.*)] \[SteamID:(.*)] (.*) : (.*)', chat_msg, re.M | re.I)
-                # Access the information of chat
-                chat_type = matchOjb.group(1)
-                player_64id = matchOjb.group(2)
-                player_name = matchOjb.group(3)
-                chat_content = matchOjb.group(4)
+        print(chat_msg)
+        if chat_msg is not None:
+            if re.search(r'\[(.*)] \[SteamID:(.*)] (.*) : (.*)', chat_msg, re.M | re.I) is not None:
                 chat_property = 'Chat'
-                return chat_type, player_64id, player_name, chat_content, chat_property
-                pass
-            except:
-                # Access the information of the Team kill
-                matchOjb = re.search(r'\[ChatAdmin] ASQKillDeathRuleset : Player (.*)%s Team Killed Player (.*)'
-                                     , chat_msg, re.M | re.S)
-                chat_type = 'ChatAdmin'
-                Player_attacker = matchOjb.group(1)
-                Player_victim = matchOjb.group(2)
-                chat_content = 'TeamKill'
+                return chat_msg, chat_property
+            elif re.search(r'\[ChatAdmin] ASQKillDeathRuleset : Player (.*)%s Team Killed Player (.*)',
+                           chat_msg, re.M | re.S) is not None:
                 chat_property = 'TeamKill'
-                return chat_type, Player_attacker, Player_victim, chat_content, chat_property
-                pass
+                return chat_msg, chat_property
+            elif re.search(r'\[SteamID:(.*)] (.*) has possessed admin camera.', chat_msg, re.M | re.S) is not None:
+                chat_property = 'AdminCamera'
+                return chat_msg, chat_property
+            elif re.search(r'\[SteamID:(.*)] (.*) has unpossessed admin camera.', chat_msg, re.M | re.S) is not None:
+                chat_property = 'AdminCamera'
+                return chat_msg, chat_property
+            elif re.search(r'"(.*) \[SteamID (.*)] Banned player (.*). \[steamid=(.*)] (.*) for interval (.*)"',
+                           chat_msg, re.M | re.S) is not None:
+                chat_property = 'AdminBan'
+                return chat_msg, chat_property
+            elif re.search(r'(.*) was kicked: (.*)', chat_msg, re.M | re.S) is not None:
+                chat_property = 'AdminKick'
+                return chat_msg, chat_property
+            elif re.search(r'Remote admin disbanded squad (.*) on team (.*), named "(.*)"',
+                           chat_msg, re.M | re.S) is not None:
+                chat_property = 'AdminDisbandSquad'
+                return chat_msg, chat_property
+            pass
         pass
 
 
@@ -201,8 +206,6 @@ class RconError(Exception):
 class RconAuthError(RconError):
     """Raised if an RCON Authentication error occurs."""
     pass
-
-
 
 
 class RconSizeError(RconError):

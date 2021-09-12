@@ -3,6 +3,7 @@ import datetime
 from Core.Base.Log_Parser_SQL import Log_Parser_SQL
 from Core.Plugins.create_sql_database import create_sql_database
 
+
 class threadLogParser(threading.Thread):
     def __init__(self, database_info, server_info, date_today, threadID):
         threading.Thread.__init__(self)
@@ -25,21 +26,22 @@ class threadLogParser(threading.Thread):
                 self.server_name, datetime.datetime.now().strftime('%H:%M:%S')))
             try:
                 self.start_point, self.LogNet_status = Log_Parser_SQL(database_info=self.database_info,
-                                                            server_id=self.server_id,
-                                                            log_address=self.server_log,
-                                                            date_today=self.date_today,
-                                                            LogNet_status=self.LogNet_status,
-                                                            start_point=self.start_point)
+                                                                      server_id=self.server_id,
+                                                                      log_address=self.server_log,
+                                                                      date_today=self.date_today,
+                                                                      LogNet_status=self.LogNet_status,
+                                                                      start_point=self.start_point)
                 pass
             except:
                 self.start_point, self.LogNet_status = Log_Parser_SQL(database_info=self.database_info,
-                                                            server_id=self.server_id,
-                                                            log_address=self.server_log,
-                                                            date_today=self.date_today,
-                                                            LogNet_status=self.LogNet_status,
-                                                            start_point=self.last_point)
+                                                                      server_id=self.server_id,
+                                                                      log_address=self.server_log,
+                                                                      date_today=self.date_today,
+                                                                      LogNet_status=self.LogNet_status,
+                                                                      start_point=self.last_point)
                 pass
             self.last_point = self.start_point
             pass
         pass
+
     pass

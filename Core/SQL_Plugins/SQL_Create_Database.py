@@ -1,7 +1,7 @@
 import MySQLdb
 
 
-def create_sql_database(database_info, date_today):
+def SQL_Create_Database(database_info, date_today):
 
     database_host = str(database_info["database_host"])
     database_port = int(database_info["database_port"])
@@ -13,7 +13,8 @@ def create_sql_database(database_info, date_today):
                      'Log_Battle_Vehicle_Destroy', 'Log_Battle_wound', 'Log_Map_rotation', 'Log_Player_connect',
                      'Log_Player_disconnect', 'Log_Squads', 'Log_Possess', 'Log_UnPossess', 'Log_Match_Winner',
                      'Log_Rcon_AdminBan', 'Log_Rcon_AdminCamera', 'Log_Rcon_AdminDisbandSquad',
-                     'Log_Rcon_AdminKick', 'Log_Rcon_Chat', 'Log_Rcon_TeamKill', "Log_Server_Tick_Rate")
+                     'Log_Rcon_AdminKick', 'Log_Rcon_Chat', 'Log_Rcon_PlayerInfo', 'Log_Rcon_TeamKill',
+                     "Log_Server_Tick_Rate")
 
     # Create connection to database
     db = MySQLdb.connect(host=database_host, port=database_port, user=database_user, passwd=database_passwd,
@@ -211,6 +212,16 @@ def create_sql_database(database_info, date_today):
                                "Player_name VARCHAR(255) NOT NULL, " \
                                "Chat_Content TEXT(65535) NOT NULL, " \
                                "server_id VARCHAR(255) NOT NULL)"
+            pass
+        if i == 'Log_Rcon_PlayerInfo':
+            sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
+                               " (Player_id VARCHAR(255) PRIMARY KEY, " \
+                               "Player_64id VARCHAR(255) , " \
+                               "player_name VARCHAR(255) , " \
+                               "player_team_id VARCHAR(255) , " \
+                               "player_squad_id VARCHAR(255) , " \
+                               "server_id VARCHAR(255) PRIMARY KEY" \
+                               ")"
             pass
         if i == 'Log_Rcon_TeamKill':
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \

@@ -1,7 +1,7 @@
 import MySQLdb
 import time
 
-def Insert_SQL(database_info, db_name, table, value):
+def SQL_Insert(database_info, db_name, table, value):
     database_host = str(database_info["database_host"])
     database_port = int(database_info["database_port"])
     database_user = str(database_info["database_user"])

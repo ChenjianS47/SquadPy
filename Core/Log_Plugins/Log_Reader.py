@@ -1,7 +1,7 @@
 import codecs
 
 # Define the function for read the logs
-def read_logs(log_addrres, start_point):
+def Log_Reader(log_addrres, start_point):
     # Must use 'rb' for seek calculated by bytes
     fo = codecs.open(log_addrres, 'r', encoding='utf-8')
     # print("Filename: ", fo.name)

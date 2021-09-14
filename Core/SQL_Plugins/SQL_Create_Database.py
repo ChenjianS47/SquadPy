@@ -215,12 +215,12 @@ def SQL_Create_Database(database_info, date_today):
             pass
         if i == 'Log_Rcon_PlayerInfo':
             sql_create_table = "CREATE TABLE IF NOT EXISTS " + i + "." + "`" + date_today + "`" + \
-                               " (Player_id VARCHAR(255) PRIMARY KEY, " \
-                               "Player_64id VARCHAR(255) , " \
-                               "player_name VARCHAR(255) , " \
-                               "player_team_id VARCHAR(255) , " \
-                               "player_squad_id VARCHAR(255) , " \
-                               "server_id VARCHAR(255) PRIMARY KEY" \
+                               " (Player_id VARCHAR(255) unique NOT NULL, " \
+                               "Player_64id VARCHAR(255) NOT NULL, " \
+                               "player_name VARCHAR(255) NOT NULL, " \
+                               "player_team_id VARCHAR(255) NOT NULL, " \
+                               "player_squad_id VARCHAR(255) NOT NULL, " \
+                               "server_id VARCHAR(255) NOT NULL" \
                                ")"
             pass
         if i == 'Log_Rcon_TeamKill':

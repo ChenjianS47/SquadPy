@@ -9,3 +9,5 @@
 *.log
 *.sql
 *.sql
+Only for test function.py
+dropDB.sql

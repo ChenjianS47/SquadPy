@@ -143,6 +143,9 @@ class RconConnection(object):
         body_parts = []
         while True:
             response = self._recv_pkt()
+            if response.pkt_type == SERVERDATA_CHAT:
+                print(response)
+                continue
             if response.pkt_type != SERVERDATA_RESPONSE_VALUE:
                 raise RconError('Received unexpected RCON packet type')
             if response.pkt_id == chk_pkt.pkt_id:

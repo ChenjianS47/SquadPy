@@ -1,12 +1,14 @@
-import asyncio
+import threading
 import datetime
+import time
 
 from Core.Base.Log_Parser_SQL import Log_Parser_SQL
 from Core.SQL_Plugins.SQL_Create_Database import SQL_Create_Database
 
 
-class threadLogParser(asyncio):
+class threadLogParser(threading.Thread):
     def __init__(self, database_info, server_info, date_today, threadID):
+        threading.Thread.__init__(self)
         self.LogNet_status = 0
         self.start_point = 0
         self.last_point = 0
@@ -19,29 +21,23 @@ class threadLogParser(asyncio):
         pass
 
     def run(self):
-        # Create the datebase when the program starts
-        SQL_Create_Database(self.database_info, self.date_today)
-        print("updating the log of server {} to SQL {}".format(
-            self.server_name, datetime.datetime.now().strftime('%H:%M:%S')))
-        try:
-            self.start_point, self.LogNet_status = Log_Parser_SQL(database_info=self.database_info,
-                                                                 server_id=self.server_id,
-                                                                 log_address=self.server_log,
-                                                                 date_today=self.date_today,
-                                                                 LogNet_status=self.LogNet_status,
-                                                                 start_point=self.start_point)
+        while 1:
+            # Create the datebase when the program starts
+            SQL_Create_Database(self.database_info, self.date_today)
+            print("updating the log of server {} to SQL {}".format(
+                self.server_name, datetime.datetime.now().strftime('%H:%M:%S')))
+            try:
+                self.start_point, self.LogNet_status = Log_Parser_SQL(database_info=self.database_info,
+                                                                      server_id=self.server_id,
+                                                                      log_address=self.server_log,
+                                                                      date_today=self.date_today,
+                                                                      LogNet_status=self.LogNet_status,
+                                                                      start_point=self.start_point)
+                pass
+            except AttributeError:
+                self.start_point = self.last_point
+                pass
+            self.last_point = self.start_point
             pass
-        except Exception as e:
-            self.start_point, self.LogNet_status = Log_Parser_SQL(database_info=self.database_info,
-                                                                 server_id=self.server_id,
-                                                                 log_address=self.server_log,
-                                                                 date_today=self.date_today,
-                                                                 LogNet_status=self.LogNet_status,
-                                                                 start_point=self.last_point)
-            pass
-        else:
-            self.start_point = self.last_point
-            pass
-        self.last_point = self.start_point
         pass
     pass

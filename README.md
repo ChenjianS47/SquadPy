@@ -15,6 +15,7 @@ The function of rcon used a modified version of pysrcds
 
 ## 许可证\License
 本项目基于MIT许可开发，详情请看[LICENSE.md](https://github.com/ChenjianS47/FHMs_daily_COVID-19_reports/blob/main/LICENSE)
+
 This programm is distributed under the MIT license. See
 [LICENSE.md](https://github.com/ChenjianS47/FHMs_daily_COVID-19_reports/blob/main/LICENSE)
 for more information.

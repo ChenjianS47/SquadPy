@@ -11,6 +11,7 @@ The function of rcon used a modified version of pysrcds
 ## 已完成功能\Function can be use
 1. RCON
 2. 读取并解析游戏后台日志（如获取伤害记录、击倒记录、击杀记录等）
+   Read and parse the game log(like damage log, wound log and kill log,etc) 
 
 ## 许可证\License
 本项目基于MIT许可开发，详情请看[LICENSE.md](https://github.com/ChenjianS47/FHMs_daily_COVID-19_reports/blob/main/LICENSE)
